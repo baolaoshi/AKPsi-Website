@@ -1,0 +1,115 @@
+@font-face {
+	font-family: "League Gothic";
+	font-weight: normal;
+	src: url("/static/portal/fonts/leaguegothic-regular-webfont.ttf");
+}
+
+@font-face {
+	font-family: "League Gothic Condensed";
+	font-weight: normal;
+	src: url("/static/portal/fonts/leaguegothic-condensed-regular-webfont.ttf");
+}
+
+@font-face {
+	font-family: "Lato";
+	font-weight: normal;
+	src: url("/static/portal/fonts/Lato-Reg.ttf");
+}
+
+@font-face {
+	font-family: "Lato";
+	font-weight: bold;
+	src: url("/static/portal/fonts/Lato-Bol.ttf");
+}
+
+#sitecontainer {
+	margin: 4% 10% 4% 10%;
+}
+
+/* HEADER THINGS */
+
+#logo {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#bigtitle {
+	font-family: "League Gothic";
+	font-size: 80px;
+	display: inline-block;
+	vertical-align: bottom;
+	margin: 0 0 0 1%;
+	color: #072937;
+}
+
+.headerelem {
+	display: inline-block;
+	vertical-align: top;
+	padding: 0.5% 0 0.5% 0;
+	margin: 0;
+	margin-top: 2%;
+	margin-right: -0.38%;
+	width: 20.01%;
+	font-size: 3em;
+	text-align: center;
+	font-family: "League Gothic";
+}
+
+.navy {
+	background-color: #072937;
+	color: #D2A732;
+}
+
+.gold {
+	background-color: #D2A732;
+	color: #072937;
+}
+
+@media screen and (max-width: 1200px) {
+	.headerelem {
+		width: 243px;
+	}
+}
+
+/* GENERAL STUFF */
+
+.sectiontitle {
+	font-family: "League Gothic";
+	font-size: 80px;
+	border-bottom: 5px solid black;
+	margin-top: 3%;
+}
+
+/* INDEX PAGE */
+
+#billboard {
+	margin-top: 1%;
+	width:100%;
+}
+
+#billboardimg {
+	width: 100%;
+}
+
+#joinus {
+	font-family: "Lato";
+	font-weight: bold;
+	font-size: 40px;
+	color: black;
+	background-color: white;
+	text-align: center;	
+	margin-top: -0.5%;
+}
+
+#joinus a {
+	font-size: 80px;
+	color: #083769;
+}
+
+/* ABOUT PAGE */
+
+#letter {
+	margin-top: 2%;
+	font-family: "Lato";
+	font-size: 20px;
+}

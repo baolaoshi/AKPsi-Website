@@ -1,0 +1,37 @@
+<script>
+	$(function() { 
+		$(".headerelem").hover(
+			function() {
+				$(this).stop(true, true).animate({
+					backgroundColor: 'white',
+					color: 'black'
+				}, 150);
+			}, function() {
+				if ($(this).hasClass("navy")) {
+					current_bg_color = "#072937";
+					current_color = "#D2A732";
+				} else {
+					current_bg_color = "#D2A732";
+					current_color = "#072937";
+				}
+				$(this).stop(true, true).animate({
+					backgroundColor: current_bg_color,
+					color: current_color
+				}, 150);
+			}
+		);
+	});
+</script>
+
+<div id="logo">
+	<a href="/"><img src="/static/portal/images/logo.gif" /></a>
+</div>
+<a href="/"><h1 id="bigtitle">ALPHA KAPPA PSI</h1></a>
+
+<div></div>
+
+<a href="/"><div class="headerelem navy">Home</div></a>
+<a href="/about"><div class="headerelem gold">About Us</div></a>
+<a href="/brothers"><div class="headerelem navy">Brothers</div></a>
+<a href="/news"><div class="headerelem gold">News</div></a>
+<a href="/recruitment"><div class="headerelem navy" style="margin-right:0">Recruitment</div></a>

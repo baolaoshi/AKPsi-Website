@@ -20,4 +20,11 @@ urlpatterns = patterns('',
     # about us page
     url(r'^about/$', about_view),
 
+    # brothers page
+    url(r'^brothers/$', brothers_view),
+
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += patterns('',
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+)

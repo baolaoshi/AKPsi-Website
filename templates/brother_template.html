@@ -1,0 +1,13 @@
+<li>
+<img src="{{ bro.bro_pic.url }}" />
+<span class="name">{{ bro.first_name }} {{ bro.last_name }}</span>
+<div class="brodescript">
+	<span class="descriptname">{{ bro.first_name }} {{ bro.last_name }}</span>
+	{% if bro.is_alumni %}<p>{{ bro.pledge_class }} Class</p>{% endif %}
+	{% if bro.major %}<p>Major: {{ bro.major }}</p>{% endif %}
+	{% if bro.hometown %}<p>Hometown: {{ bro.hometown }}</p>{% endif %}
+	{% if bro.nickname %}<p>Nickname: {{ bro.nickname }}</p>{% endif %}
+	{% if bro.family %}<p>Family: {{ bro.family }}</p>{% endif %}
+	{% if bro.quote %}<p><i>"{{ bro.quote }}"</i>{% if bro.quote_author %}<br>&ndash; {{ bro.quote_author }}{% endif %}</p>{% endif %}
+</div>
+</li>

@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Our Brothers{% endblock %}
+
+{% block content %}
+
+<script>
+	$(function(){
+		$("#alumniswitch").click(function() {
+			$("#activecontainer").css('display', 'none');
+			$("#alumnicontainer").css('display', 'block');
+			$("#alumniswitch").css('pointer-events', 'none');
+			$("#alumniswitch").css('cursor', 'default');
+			$("#activeswitch").css('pointer-events', 'auto');
+			$("#activeswitch").css('cursor', 'auto');
+			$("#activecontainer").insertAfter("#alumnicontainer");
+			$("#alumniswitch").css('text-decoration', 'none');
+			$("#activeswitch").css('text-decoration', 'underline');
+			return false;
+		})
+		$("#activeswitch").click(function() {
+			$("#alumnicontainer").css('display', 'none');
+			$("#activecontainer").css('display', 'block');				
+			$("#activeswitch").css('pointer-events', 'none');
+			$("#activeswitch").css('cursor', 'default');
+			$("#alumniswitch").css('pointer-events', 'auto');
+			$("#alumniswitch").css('cursor', 'auto');
+			$("#alumnicontainer").insertAfter("#activecontainer");
+			$("#activeswitch").css('text-decoration', 'none');
+			$("#alumniswitch").css('text-decoration', 'underline');
+			return false;
+		})	
+	});
+</script>
+
+<div id="switch">
+	<a href="#" id="activeswitch">Active</a> | <a href="#" id="alumniswitch">Alumni</a>
+</div>
+
+<div id="activecontainer">
+	<div class="brosection">
+		<div class="sectiontitle">Mu Class</div>
+		<ul>
+		{% for bro in mu_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	
+	<div class="brosection">
+		<div class="sectiontitle">Nu Class</div>
+		<ul>
+		{% for bro in nu_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+
+	<div class="brosection">
+		<div class="sectiontitle">Xi Class</div>
+		<ul>
+		{% for bro in xi_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	
+	<div class="brosection">
+		<div class="sectiontitle">Omicron Class</div>
+		<ul>
+		{% for bro in omicron_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	
+	<div class="brosection">
+		<div class="sectiontitle">Pi Class</div>
+		<ul>
+		{% for bro in pi_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	
+	<div class="brosection">
+		<div class="sectiontitle">Rho Class</div>
+		<ul>
+		{% for bro in rho_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	
+	<div class="brosection">
+		<div class="sectiontitle">Sigma Class</div>
+		<ul>
+		{% for bro in sigma_class %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+
+<div id="alumnicontainer">
+
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2014</div>
+		<ul>
+		{% for bro in grad_2014 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2013</div>
+		<ul>
+		{% for bro in grad_2013 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2012</div>
+		<ul>
+		{% for bro in grad_2012 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2011</div>
+		<ul>
+		{% for bro in grad_2011 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2010</div>
+		<ul>
+		{% for bro in grad_2010 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2009</div>
+		<ul>
+		{% for bro in grad_2009 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2008</div>
+		<ul>
+		{% for bro in grad_2008 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2007</div>
+		<ul>
+		{% for bro in grad_2007 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2006</div>
+		<ul>
+		{% for bro in grad_2006 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="brosection">
+		<div class="sectiontitle">Class of 2005</div>
+		<ul>
+		{% for bro in grad_2005 %}
+			{% include "brother_template.html" %}
+		{% endfor %}
+		</ul>
+	</div>
+
+</div>
+
+
+{% endblock %}

@@ -23,6 +23,15 @@ urlpatterns = patterns('',
     # brothers page
     url(r'^brothers/$', brothers_view),
 
+    # recruitment page
+    url(r'^recruitment/$', recruitment_view),
+
+    # sign up page
+    url(r'^signup/$', signup_view),
+
+    # application page
+    url(r'^application/$', application_view),
+
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += patterns('',

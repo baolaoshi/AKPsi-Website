@@ -1,6 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
+from django.contrib.auth import authenticate, login, logout
+from AKPsiWebsite.forms import NewUserForm, NewRusheeForm
+from portal.models import Rushee, User
 
 def index_view(request):
 	data = {}
@@ -40,3 +43,45 @@ def brothers_view(request):
 	data['grad_2014'] = alumni_bros.filter(grad_class="2014").order_by('last_name')
 
 	return render(request,'brothers.html', data, context_instance=RequestContext(request))
+
+def recruitment_view(request):
+	data = {}
+	if request.user.is_authenticated():
+		return HttpResponseRedirect("/application/")
+	else:
+		return render(request,'recruitment.html', data, context_instance=RequestContext(request))
+
+def signup_view(request):
+	data = {}
+	form = NewUserForm(request.POST)
+	if form.is_valid():
+		print "valid"
+		new_user = User(username=request.POST['username'], email=request.POST['username'], password=request.POST['password1'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
+		new_user.save()
+		new_rushee = Rushee(user=new_user)
+		new_rushee.save()
+		new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+		if new_user is not None:
+			new_user.backend = 'django.contrib.auth.backends.ModelBackend'
+			login(request, new_user)
+		return HttpResponseRedirect("/application")
+	else:
+		form = NewUserForm()
+	data["form"] = form
+	return render(request, 'signup.html', data, context_instance=RequestContext(request))
+
+def application_view(request):
+	data = {}
+	print request.POST
+	form = NewRusheeForm(request.POST)
+
+	if form.is_valid():
+		print "valid"
+		return HttpResponseRedirect("/application")
+	else:
+		print "invalid"
+		print form
+		form = NewRusheeForm()
+
+	data["form"] = form
+	return render(request, 'application.html', data, context_instance=RequestContext(request))

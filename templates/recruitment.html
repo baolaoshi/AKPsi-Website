@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Recruitment{% endblock %}
+
+{% block content %}
+<h1>Apply for Membership</h1>
+<table style="width:100%">
+    <tbody>
+        <tr style="border-bottom:0px;">
+            <td width="50%" style="border-bottom:0px;">
+                <h2>Don't have an account?</h2><br>
+                <p>You will need to create an account to apply.<br>Through this account, you will be able to:</p>
+                <ul>
+                    <li>Update your application</li>
+                    <li>Preview your submission</li>
+                    <li>Submit your final application</li>
+                </ul>
+                <p>Deadline to apply: <b>February 1st </b> at <b>9:00 PM EST</b>. </p>
+                <a href="/signup">Sign up Now</a>
+            </td>
+            <td width="50%" style="border-bottom:0px;">
+                <h2>Login</h2>
+                <form action="/recruitment/users/login?url=users%2Flogin" id="UserLoginForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"></div><div class="input text required"><label for="UserUsername">Email</label><input name="data[User][username]" maxlength="40" type="text" id="UserUsername"></div><div class="input password required"><label for="UserPassword">Password</label><input name="data[User][password]" type="password" id="UserPassword"></div><div class="submit"><input type="submit" value="Login"></div></form>    </td>
+            </tr>
+</tbody></table>
+{% endblock %}

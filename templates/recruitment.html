@@ -20,7 +20,13 @@
             </td>
             <td width="50%" style="border-bottom:0px;">
                 <h2>Login</h2>
-                <form action="/recruitment/users/login?url=users%2Flogin" id="UserLoginForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"></div><div class="input text required"><label for="UserUsername">Email</label><input name="data[User][username]" maxlength="40" type="text" id="UserUsername"></div><div class="input password required"><label for="UserPassword">Password</label><input name="data[User][password]" type="password" id="UserPassword"></div><div class="submit"><input type="submit" value="Login"></div></form>    </td>
-            </tr>
+                <form action="" method="post" accept-charset="utf-8">
+                    {% csrf_token %}
+                    {{ error }}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary btn-lg btn-logo" value="Login" />
+                </form>    
+            </td>
+        </tr>
 </tbody></table>
 {% endblock %}

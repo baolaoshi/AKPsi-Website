@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     # brothers page
     url(r'^brothers/$', brothers_view),
 
+    # news page
+    url(r'^news/$', news_view),
+
     # recruitment page
     url(r'^recruitment/$', recruitment_view),
 
@@ -31,6 +34,9 @@ urlpatterns = patterns('',
 
     # application page
     url(r'^application/$', application_view),
+
+    # logout page
+    url(r'^logout/$', logout_view),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

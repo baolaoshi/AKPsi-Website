@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
-from AKPsiWebsite.forms import NewUserForm, NewRusheeForm
+from AKPsiWebsite.forms import NewUserForm, NewRusheeForm, LoginForm
 from portal.models import Rushee, User
 
 def index_view(request):
@@ -44,20 +44,38 @@ def brothers_view(request):
 
 	return render(request,'brothers.html', data, context_instance=RequestContext(request))
 
+def news_view(request):
+	data = {}
+	return render(request, 'news.html', data)
+
 def recruitment_view(request):
 	data = {}
 	if request.user.is_authenticated():
 		return HttpResponseRedirect("/application/")
 	else:
+		if request.method == 'POST':
+			form = LoginForm(request.POST)
+			if form.is_valid():
+				cd = form.cleaned_data
+				username = cd['username']
+				password = cd['password']
+				user = authenticate(username=username, password=password)
+				if user is not None:
+					login(request, user)
+					return HttpResponseRedirect("/application/")
+				else: 
+					data['error'] = "Your email and password don't match!"
+					data['form'] = LoginForm()
+		else:
+			data['form'] = LoginForm()
 		return render(request,'recruitment.html', data, context_instance=RequestContext(request))
 
 def signup_view(request):
 	data = {}
 	form = NewUserForm(request.POST)
 	if form.is_valid():
-		print "valid"
-		new_user = User(username=request.POST['username'], email=request.POST['username'], password=request.POST['password1'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
-		new_user.save()
+		new_user = form.save()
+		print form.cleaned_data['password1']
 		new_rushee = Rushee(user=new_user)
 		new_rushee.save()
 		new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
@@ -71,17 +89,53 @@ def signup_view(request):
 	return render(request, 'signup.html', data, context_instance=RequestContext(request))
 
 def application_view(request):
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect("/recruitment")
 	data = {}
-	print request.POST
-	form = NewRusheeForm(request.POST)
 
-	if form.is_valid():
-		print "valid"
-		return HttpResponseRedirect("/application")
+	if request.method == 'POST':
+		form = NewRusheeForm(request.POST, request.FILES)
+		if form.is_valid():
+			cd = form.cleaned_data
+			rushee = Rushee.objects.get(user=request.user)
+			rushee.phone_num = cd['phone_num']
+			rushee.dorm = cd['dorm']
+			rushee.grad_class = cd['grad_class']
+			rushee.major = cd['major']
+			rushee.gpa = cd['gpa']
+			rushee.q1 = cd['q1']
+			rushee.q2 = cd['q2']
+			rushee.q3 = cd['q3']
+			rushee.q4 = cd['q4']
+			rushee.picture = cd['picture']
+			rushee.resume = cd['resume']
+			rushee.save()
+			return HttpResponseRedirect("/application")
+		else:
+			rushee = Rushee.objects.get(user=request.user)
+			form = NewRusheeForm(initial={'phone_num' : rushee.phone_num,
+										  'dorm' : rushee.dorm,
+										  'grad_class' : rushee.grad_class,
+										  'major' : rushee.major,
+										  'gpa' : rushee.gpa,
+										  'q1' : rushee.q1, 
+										  'q2' : rushee.q2,
+										  'q3' : rushee.q3,
+										  'q4' : rushee.q4})
 	else:
-		print "invalid"
-		print form
-		form = NewRusheeForm()
-
+		rushee = Rushee.objects.get(user=request.user)
+		form = NewRusheeForm(initial={'phone_num' : rushee.phone_num,
+									  'dorm' : rushee.dorm,
+									  'grad_class' : rushee.grad_class,
+									  'major' : rushee.major,
+									  'gpa' : rushee.gpa,
+									  'q1' : rushee.q1, 
+									  'q2' : rushee.q2,
+									  'q3' : rushee.q3,
+									  'q4' : rushee.q4})	
 	data["form"] = form
 	return render(request, 'application.html', data, context_instance=RequestContext(request))
+
+def logout_view(request):
+	logout(request)
+	return HttpResponseRedirect('/recruitment')

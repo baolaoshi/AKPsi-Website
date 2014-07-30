@@ -4,38 +4,7 @@
 
 {% block content %}
 
-<script>
-	$(function() {
-		$('#joinus a').hover(
-			function() {
-				$(this).stop(true, true).animate({
-					color: 'black'
-				}, 200);
-				$("#beginfuture").stop(true, true).animate({
-					color: '#D2A732'
-				}, 200);
-				// $("#joinus").stop(true, true).animate({
-				// 	backgroundColor: 'white'
-				// }, 150);
-		}, function() {
-				$(this).stop(true, true).animate({
-					color: '#083769'
-				}, 200);
-				$("#beginfuture").stop(true, true).animate({
-					color: 'black'
-				}, 200);
-				// $("#joinus").stop(true, true).animate({
-				// 	backgroundColor: 'black'
-				// }, 150);
-		});
-	});
-</script>
-
 <div id="billboard">
 	<img id="billboardimg" src="/static/portal/images/billboard.jpg" />
-</div>
-
-<div id="joinus">
-	<a href="/recruitment">Join us</a> and <span id="beginfuture">begin your future.</span>
 </div>
 {% endblock %}

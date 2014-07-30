@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import FileField
 
 class Brother(models.Model):
 	first_name = models.CharField(max_length=40)
@@ -18,6 +19,29 @@ class Brother(models.Model):
 	def __unicode__(self):
 		return self.first_name + " " + self.last_name
 
+class ContentTypeRestrictedFileField(FileField):
+	def __init__(self, *args, **kwargs):
+	    self.content_types = kwargs.pop("content_types")
+	    self.max_upload_size = kwargs.pop("max_upload_size")
+
+	    super(ContentTypeRestrictedFileField, self).__init__(*args, **kwargs)
+
+	def clean(self, *args, **kwargs):        
+	    data = super(ContentTypeRestrictedFileField, self).clean(*args, **kwargs)
+
+	    file = data.file
+	    try:
+	        content_type = file.content_type
+	        if content_type in self.content_types:
+	            if file._size > self.max_upload_size:
+	                raise forms.ValidationError(_('Please keep filesize under %s. Current filesize %s') % (filesizeformat(self.max_upload_size), filesizeformat(file._size)))
+	        else:
+	            raise forms.ValidationError(_('Filetype not supported.'))
+	    except AttributeError:
+	        pass        
+
+	    return data
+
 class Rushee(models.Model):
 	user = models.OneToOneField(User)
 	phone_num = models.CharField(max_length=20)
@@ -30,4 +54,8 @@ class Rushee(models.Model):
 	q3 = models.TextField(blank=True)
 	q4 = models.TextField(blank=True)
 	picture = models.ImageField(upload_to="rushpics")
-	resume = models.FileField(upload_to="rushresumes")
+	resume = ContentTypeRestrictedFileField(upload_to="rushresumes", 
+		  								    content_types=['application/pdf'],
+											max_upload_size=26214400,
+											blank=True,
+											null=True)

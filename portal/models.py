@@ -49,13 +49,17 @@ class Rushee(models.Model):
 	grad_class = models.CharField(max_length=20)
 	major = models.CharField(max_length=100)
 	gpa = models.CharField(max_length=20)
-	q1 = models.TextField(blank=True)
-	q2 = models.TextField(blank=True)
-	q3 = models.TextField(blank=True)
-	q4 = models.TextField(blank=True)
 	picture = models.ImageField(upload_to="rushpics")
 	resume = ContentTypeRestrictedFileField(upload_to="rushresumes", 
 		  								    content_types=['application/pdf'],
 											max_upload_size=26214400,
 											blank=True,
 											null=True)
+
+class Question(models.Model):
+	content = models.TextField()
+
+class Answer(models.Model):
+	text = models.TextField()
+	question = models.ForeignKey(Question)
+	rushee = models.ForeignKey(Rushee)
